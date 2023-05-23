@@ -6,6 +6,7 @@ import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { localService } from '../service/localService';
 import { RingLoader } from 'react-spinners';
+import { useLocation } from 'react-router-dom';
 const { Header, Content, Footer, Sider } = Layout;
 function getItem(label, key, icon, children) {
   return {
@@ -15,7 +16,7 @@ function getItem(label, key, icon, children) {
     label,
   };
 }
-const menu = [
+  const menu = [
     getItem(<NavLink to={'/admin-user'}>User</NavLink>, '1', <FaUserAlt />),
     getItem(<NavLink to={'/admin-course'}>Course</NavLink>, '2', <FaBookOpen />),
   ];
@@ -32,6 +33,8 @@ const menu = [
     },
   ];
 export default function AdminLayout({Component}) {
+  const location = useLocation();
+  
   const [collapsed, setCollapsed] = useState(false);
   const { token: { colorBgContainer }, } = theme.useToken();
   const isLoading = useSelector((state) => state.loadingSlice.isLoading)
@@ -57,7 +60,7 @@ export default function AdminLayout({Component}) {
               background: 'rgba(255, 255, 255, 0.2)',
             }}
           />
-          <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={menu} />
+          <Menu theme="dark" defaultSelectedKeys={location.pathname === '/admin-course' ? ['2'] : ['1']} mode="inline" items={menu} />
         </Sider>
         <Layout className="site-layout">
           <Header
