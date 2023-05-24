@@ -32,7 +32,6 @@ export default function AdminUser() {
   const [listUser, setListUser] = useState([])
 
   const fetchListUser = (isGroupCode) => {
-    console.log("🚀 ~ file: AdminUser.js:35 ~ fetchListUser ~ isGroupCode:", isGroupCode)
     dispatch(setLoadingOn())
     userService.getListUser(isGroupCode)
     .then((res) => {
