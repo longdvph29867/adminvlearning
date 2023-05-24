@@ -32,6 +32,7 @@ export default function AdminUser() {
   const [listUser, setListUser] = useState([])
 
   const fetchListUser = (isGroupCode) => {
+    console.log("🚀 ~ file: AdminUser.js:35 ~ fetchListUser ~ isGroupCode:", isGroupCode)
     dispatch(setLoadingOn())
     userService.getListUser(isGroupCode)
     .then((res) => {
@@ -69,7 +70,7 @@ export default function AdminUser() {
       userService.deleteUser(id)
       .then((res) => {
         dispatch(setLoadingOff())
-        fetchListUser();
+        fetchListUser(isGroupCode);
         message.success('Xoá thành công!')
       })
       .catch((err) => {
